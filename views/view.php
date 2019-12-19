@@ -77,14 +77,8 @@ $ajaxIds = array_diff(is_array($widget->model->$attribute) ? $widget->model->$at
         <?php
         if ( $widget->form !== null && ( $widget->form instanceof \yii\widgets\ActiveForm ) &&
             $widget->model !== null && ( $widget->model instanceof \yii\base\Model ) && $attribute != '') {
-            if(!is_array($widget->model->$attribute)) {
-                foreach ($widget->model->$attribute as $attr) {
-                    echo $widget->form->field($widget->model, $attribute . (is_array($widget->model->$attribute) ? "[]" : ""))->hiddenInput()->label(false);
-                }
-            } else {
-                echo $widget->form->field($widget->model, $attribute.( is_array( $widget->model->$attribute ) ? "[]" : "" ))->hiddenInput()->label(false);
-            }
-}
+            echo $widget->form->field($widget->model, $attribute . (is_array($widget->model->$attribute) ? "[]" : ""))->hiddenInput()->label(false);
+        }
         ?>
     </div>
 
@@ -355,7 +349,9 @@ if ( $widget->form !== null && ( $widget->form instanceof \yii\widgets\ActiveFor
             }
         }
         foreach ($ajaxIds as $ajaxId) {
-            $js .= "addItem($ajaxId, '{$widget->model->getItemLabel($ajaxId)}');";
+            if ($ajaxId !== null) {
+                $js .= "addItem($ajaxId, '{$widget->model->getItemLabel($ajaxId)}');";
+            }
         }
         if ( !$widget->expand ) {
             $js .= "if ( $(widgetId + ' .tree-dropdown').hasClass('open') ) { $(widgetId + ' .tree-input').click(); };";
