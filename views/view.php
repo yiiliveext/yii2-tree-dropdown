@@ -77,7 +77,7 @@ $ajaxIds = array_diff(is_array($widget->model->$attribute) ? $widget->model->$at
         <?php
         if ( $widget->form !== null && ( $widget->form instanceof \yii\widgets\ActiveForm ) &&
             $widget->model !== null && ( $widget->model instanceof \yii\base\Model ) && $attribute != '') {
-            echo $widget->form->field($widget->model, $attribute . (is_array($widget->model->$attribute) ? "[]" : ""))->hiddenInput()->label(false);
+            echo $widget->form->field($widget->model, $attribute . ($widget->multiSelect ? '[]' : ''))->hiddenInput()->label(false);
         }
         ?>
     </div>
