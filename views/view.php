@@ -331,6 +331,14 @@ if ( $widget->form !== null && ( $widget->form instanceof \yii\widgets\ActiveFor
             $(widgetId + ' .tree-input').removeClass('has-error').addClass('has-success'); 
         }
     });
+     $('#" . $widget->form->id . "').on('beforeSubmit', function(event, messages){
+        $(widgetId + ' > .form-group input[type=hidden]').each(function() {
+             if ($(this).val() == '') {
+                 $(this).remove();
+             }
+        }
+        );
+    });
     ";
 }
 if ( $widget->form !== null && ( $widget->form instanceof \yii\widgets\ActiveForm ) &&
@@ -349,7 +357,7 @@ if ( $widget->form !== null && ( $widget->form instanceof \yii\widgets\ActiveFor
             }
         }
         foreach ($ajaxIds as $ajaxId) {
-            if ($ajaxId !== null) {
+            if (!empty($ajaxId)) {
                 $js .= "addItem($ajaxId, '{$widget->model->getItemLabel($ajaxId)}');";
             }
         }
