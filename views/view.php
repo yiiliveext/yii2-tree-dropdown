@@ -169,7 +169,7 @@ $(document).ready(function() {
         $(widgetId + ' > .form-group input[type=hidden]:eq(0)').val('');
         $(widgetId + ' .tree-input .icon .input-clear').addClass('hide');
     });
-    $('body').on('click', widgetId + ' .tree ul li .node i',function(){
+    $('{$widget->form->id}').on('click', widgetId + ' .tree ul li .node i',function(){
         var id = $(this).next('span').attr('data-id');
         var name = $(this).next('span').html();
         if ( $(this).hasClass('fa-minus-square-o') ) {";
