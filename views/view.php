@@ -94,12 +94,13 @@ $js = "
 $(document).ready(function() {
     var widgetId = '$id';
     function addItem(id, name) {
-        if ($(widgetId + ' .tree-input ul li.empty').length > 0) {
+        if ($(widgetId + ' .tree-input ul').length > 0) {
             $(widgetId + ' .tree-input ul li.empty').remove();
+            $(widgetId + ' .tree-input ul').append('<li data-id='+id+'>'+name+'</li>');
         } else {
             $(widgetId + ' .tree-input > span').html(name);
         }
-        $(widgetId + ' .tree-input ul').append('<li data-id='+id+'>'+name+'</li>');
+        
         if ( $(widgetId + ' > .form-group input[type=hidden]').length > 0) {
             if ( $(widgetId + ' > .form-group input[type=hidden]:eq(0)').val() != '' && $(widgetId + ' > .form-group input[data-id=' + id + ']').length == 0) {
                 $(widgetId + ' > .form-group input[type=hidden]:eq(0)').clone().appendTo(widgetId + ' > .form-group');
