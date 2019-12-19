@@ -333,8 +333,9 @@ if ( $widget->form !== null && ( $widget->form instanceof \yii\widgets\ActiveFor
     });
      $('#" . $widget->form->id . "').on('beforeSubmit', function(event, messages){
         $(widgetId + ' > .form-group input[type=hidden]').each(function() {
-             if ($(this).val() == '') {
-                 $(this).remove();
+             var inputName = $(this).attr('name');
+             if ($(this).val() == '' && inputName.substr(-2) == '[]') {
+                 $(this).attr('name', inputName.substr(0, inputName.length-2));
              }
         }
         );
